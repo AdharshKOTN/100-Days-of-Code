@@ -32,16 +32,26 @@ screen.onkey(player1.down, "s")
 game_is_on = True
 ball.right(45)
 while game_is_on:
+    print(player1.position())
     if ball.xcor() < 390 and ball.xcor() > -390 and ball.ycor() < 290 and ball.ycor() > -290:
         print("ball is in")
-        ball.forward(2)
+        ball.forward(0.1)
+    # if ball.position() matches either player then turn 90 degrees
     else:
         if ball.xcor() > 390:
-            # player2 scores
+            print("player 2 scores")
+            break
         if ball.xcor() < -390:
-            # player1 scores
-        if ball.ycor() 
-        print("ball is out")
+            print("player 1 scores")
+            break
+        if ball.ycor() > 290 or ball.ycor() < -290:
+            print("ball should bounce")
+            ball.left(90)
+            ball.forward(0.1)
+            # ball.setheading()
+        print(ball.heading())
+        
+        print(f"x-{ball.xcor()} y-{ball.ycor()}")
     screen.update()
 
 screen.exitonclick()
