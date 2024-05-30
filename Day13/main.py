@@ -14,8 +14,7 @@ screen.title("Pong Game!")
 screen.setup(width=800, height=600)
 screen.tracer(0)
 
-
-# scoreboard = ScoreBoard()
+scoreboard = ScoreBoard()
 
 player1 = Player(STARTING_POS_P1)
 player2 = Player(STARTING_POS_P2)
@@ -30,28 +29,24 @@ screen.onkey(player1.up, "w")
 screen.onkey(player1.down, "s")
 
 game_is_on = True
-ball.right(45)
+paddle_hit_ctr = 1
 while game_is_on:
-    print(player1.position())
-    if ball.xcor() < 390 and ball.xcor() > -390 and ball.ycor() < 290 and ball.ycor() > -290:
-        print("ball is in")
-        ball.forward(0.1)
-    # if ball.position() matches either player then turn 90 degrees
-    else:
-        if ball.xcor() > 390:
-            print("player 2 scores")
-            break
-        if ball.xcor() < -390:
-            print("player 1 scores")
-            break
-        if ball.ycor() > 290 or ball.ycor() < -290:
-            print("ball should bounce")
-            ball.left(90)
-            ball.forward(0.1)
-            # ball.setheading()
-        print(ball.heading())
-        
-        print(f"x-{ball.xcor()} y-{ball.ycor()}")
     screen.update()
+    print(ball.ball_speed)
+    if paddle_hit_ctr % 6 == 0:
+        print("increasing ball speed")
+        ball.ball_speed *= 1.01
+    ball.move()
+    if (ball.distance(player2) < 30 and ball.xcor() > 350) or (ball.distance(player1) < 30 and ball.xcor() < -350):
+        ball.bounce_x()
+        paddle_hit_ctr += 1
+    if ball.xcor() > 390:
+        scoreboard.update_player2_score()
+        ball.reset() 
+    if ball.xcor() < -390:
+        scoreboard.update_player1_score()
+        ball.reset()
+    if ball.ycor() > 290 or ball.ycor() < -290:
+        ball.bounce()
 
 screen.exitonclick()
