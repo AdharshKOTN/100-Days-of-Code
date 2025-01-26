@@ -8,10 +8,11 @@ class ScoreBoard(Turtle):
     def __init__(self):
         super().__init__()
         self.writer.color("white")
-        self.writer.teleport(1, 350)
+        self.writer.penup()
+        self.writer.goto(1, 240)
         self.writer.hideturtle()
         self.display_score()
-        self.board_setup()
+        # self.board_setup()
         
     def update_player1_score(self):
         self.player1_score += 1
@@ -25,12 +26,12 @@ class ScoreBoard(Turtle):
         
     def display_score(self):
         self.writer.write(
-            f"{self.player1_score} : {self.player2_score}",
+            f"{self.player1_score}   {self.player2_score}",
             align="center",
             font=("Cooper Black", 40),
         )
     def game_over(self):
-        self.writer.teleport(0, 0)
+        self.writer.goto(0, 0)
         self.writer.hideturtle()
         self.writer.write(
             "GAME OVER!",
@@ -38,16 +39,17 @@ class ScoreBoard(Turtle):
         font=("Cooper Black", 25, "italic"),
         )
         
-    def board_setup(self):
-        setup_turtle = Turtle()
-        setup_turtle.hideturtle()
-        setup_turtle.color("white")
-        setup_turtle.teleport(0, 400)
-        setup_turtle.right(90)
-        setup_turtle.pensize(10)
-        for i in range(20):
-            setup_turtle.pendown()
-            setup_turtle.forward(20)
-            setup_turtle.penup()
-            setup_turtle.forward(20)
+    # def board_setup(self):
+    #     setup_turtle = Turtle()
+    #     setup_turtle.hideturtle()
+    #     setup_turtle.color("white")
+    #     setup_turtle.penup()
+    #     setup_turtle.goto(0, 400)
+    #     setup_turtle.right(90)
+    #     setup_turtle.pensize(10)
+    #     for i in range(20):
+    #         setup_turtle.pendown()
+    #         setup_turtle.forward(20)
+    #         setup_turtle.penup()
+    #         setup_turtle.forward(20)
             
